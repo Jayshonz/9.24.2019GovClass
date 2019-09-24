@@ -1,0 +1,27 @@
+---
+title: "gov_largest_enrollment"
+author: "Jakeschonberger"
+date: "9/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(janitor)
+library(dplyr)
+library(gt)
+```
+#Sanjana
+
+```{r read_xl}
+enrollment_data <- read_excel("raw_data/class_enrollment_summary_by_term_9.24.19.xlsx", skip =3)
+enrollment_data <- clean_names(enrollment_data)
+
+gov <- enrollment_data %>% select(course_name, course_title, course_department, u_grad) %>% filter(course_department =="Government") %>% arrange(desc(u_grad)) %>% head(1)
+gov
+```
+
+The course with the highest enrollment is `r gov` 
